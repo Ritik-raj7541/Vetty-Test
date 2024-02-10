@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template_string, request
 import os
 import html
@@ -46,7 +47,7 @@ def home(file_name='file1.txt'):
     
     # Split the content into lines
     lines = file_content.split('\n')
-
+    
     # Check if start line number is valid
     if start_line < 1 or start_line > len(lines):
         return render_error_page('Invalid start line number!')
@@ -77,6 +78,7 @@ def home(file_name='file1.txt'):
                 body {
                     font-family: Arial, sans-serif;
                     padding: 20px;
+                    background-color: #add8e6;
                 }
                 h1 {
                     color: #333;
@@ -94,7 +96,7 @@ def home(file_name='file1.txt'):
             </style>
         </head>
         <body>
-            <h1>File Content</h1>
+            <h1><i>File Content</i></h1>
             <h2>{{ file_name }}</h2>
             <pre>{{ escaped_lines | join('\n') | safe }}</pre>
         </body>
@@ -113,6 +115,7 @@ def render_error_page(error_message):
                 body {
                     font-family: Arial, sans-serif;
                     padding: 20px;
+                    background-color: yellow;
                 }
                 h1 {
                     color: #900;
@@ -135,5 +138,6 @@ def internal_server_error(e):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
