@@ -100,3 +100,40 @@ def home(file_name='file1.txt'):
         </body>
         </html>
     ''', file_name=file_name, escaped_lines=escaped_lines)
+
+def render_error_page(error_message):
+    return render_template_string('''
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Error</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                }
+                h1 {
+                    color: #900;
+                }
+                p {
+                    color: #900;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Error</h1>
+            <p>{{ error_message }}</p>
+        </body>
+        </html>
+    ''', error_message=error_message)
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_error_page('Internal Server Error')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
